@@ -1,11 +1,13 @@
 import React from 'react';
+import ProductsTable from './ProductsTable';
 
-const HomeComponent = () => (
+const HomeComponent = (props) => (
     <div>
-        <div id="categorized-products">
+        <div style={{textAlign: 'center'}}>
+            {props.renderAlphabetRubrics()}
+            <ProductsTable show={props.showProductsTable} products={props.productsToDisplay} />
         </div>
     </div>
 );
-
 
 export default HomeComponent;

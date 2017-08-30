@@ -1,6 +1,7 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import ProductPreview from '../components/ProductPreview';
+// import ProductPreview from '../components/ProductPreview';
+import ProductsTable from '../components/ProductsTable';
 require('../styles/autosuggest.css');
 
 
@@ -11,6 +12,8 @@ export default class Search extends React.Component {
 
         this.products = this.props.products;
         this.foundProduct = 'No products found.';
+        this.isProductFound = false;
+
         this.state = {
             value: '',
             suggestions: []
@@ -59,7 +62,9 @@ export default class Search extends React.Component {
 
     onSuggestionSelected = (event, {suggestionValue}) => {
         const found = this.props.findBy(suggestionValue);
-        this.foundProduct = (<ProductPreview {...found[0]} />);
+        // this.foundProduct = (<ProductPreview {...found[0]} />);
+        this.foundProduct = found;
+        this.isProductFound = true;
     };
 
 
@@ -73,7 +78,7 @@ export default class Search extends React.Component {
         };
 
         return (
-            <div className="col-md-8">
+            <div>
                 <h3 className="search-title">Search: </h3>
                 <Autosuggest
                     suggestions={suggestions}
@@ -84,7 +89,10 @@ export default class Search extends React.Component {
                     renderSuggestion={this.renderSuggestion.bind(this)}
                     inputProps={inputProps}
                 />
-                <div id="found-products" className="centered search-results">{this.foundProduct}</div>
+                <div id="found-products" className="centered search-results">
+                    {this.isProductFound ? 'Search results:' : ''}
+                    <ProductsTable show={this.isProductFound} products={this.foundProduct} />
+                </div>
             </div>
         );
     }

@@ -1,24 +1,21 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import HomeComponent from '../components/HomeComponent';
 import Search from './Search';
 import CategoriesList from './CategoriesList';
+import ProductsTable from '../components/ProductsTable';
 
 @connect(
-    store => ({
-        products: store.products.products || []
+    (store, props) => ({
+        products: store.products.products.filter(
+            product => product.specification.split(' ').join('_').replace(/[^\w\s]/gi, '').toLowerCase() === props.match.params.productsLink.toLowerCase()
+        ) || []
     })
 )
-export default class Home extends React.Component {
+export default class Products extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            productsToDisplay: this.props.products,
-            showProductsTable: true
-        };
+        this.productsSpecName = this.props.products[0].specification;
     }
 
     componentWillMount() {}
@@ -63,11 +60,13 @@ export default class Home extends React.Component {
                         products={this.props.products}
                         findBy={this.findBy.bind(this)}
                     />
-                    <HomeComponent
-                        renderAlphabetRubrics={this.renderAlphabetRubrics.bind(this)}
-                        productsToDisplay={this.state.productsToDisplay}
-                        showProductsTable={this.state.showProductsTable}
-                    />
+                    <div className="products-by-category">
+                        <h3>{this.productsSpecName}(s):</h3>
+                        <ProductsTable 
+                            show={true}
+                            products={this.props.products} 
+                        />
+                    </div>
                 </div>
                 <CategoriesList
                     products={this.props.products}
@@ -76,9 +75,3 @@ export default class Home extends React.Component {
         );
     }
 }
-
-Home.propTypes = {
-    products: PropTypes.array,
-    actions: PropTypes.object,
-    fetchProducts: PropTypes.func
-};

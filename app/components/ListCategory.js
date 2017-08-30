@@ -1,9 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 const ListCategory = (props) => (
     <li>
-        <Link to={`/category/${props.to}`}>{props.description}</Link>
+        {props.name}
+        <ul>
+            {props.subCategories}
+        </ul>
     </li>
 );
 

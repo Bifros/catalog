@@ -1,73 +1,95 @@
 import React from 'react';
 import CategoriesListComponent from '../components/CategoriesListComponent';
-import ListCategory from '../components/ListCategory';
+// import ListCategory from '../components/ListCategory';
+import {Link} from 'react-router-dom';
+
+require('../styles/accordion.css');
 
 export default class Categories extends React.Component {
 
     getCategoriesListObj() {
-        return {
-            'Cloth and linen products': [
-                'Bed Acessories', 'Cook & Steward Wears'
-            ],
-            'Tableware & Gallery Utensils': [
-                'Baker & Pastry Utensils', 'bar Untensils'
-            ]
-        };
-    }
-
-    getSubCategory() {}
-
-    getProductsBySubCategory(productsList, productSubCategory) {
-        let products = productsList.filter(product => product.subCategory === productSubCategory);
-
-        if (products.length === undefined) {
-            products = [products];
-        }
-
-        return products;
-    }
-
-    getProductBySpecification(productsList, productSecification) {
-        return productsList.filter(product => product.specification === productSecification)[0];
+        return [
+            {
+                'Cloth and linen products': [
+                    {
+                        'Bed Acessories': [
+                            '100% Acryl blankets', 'Bed sheets non-ironing'
+                        ]
+                    },
+                    {
+                        'Cook & Steward Wears': [
+                            'Bow ties', 'Shirts'
+                        ]
+                    }
+                ]
+            },
+            {
+                'Tableware & Gallery Utensils': [
+                    {
+                        'Baker & Pastry Utensils': [
+                            'Angel cake pans', 'bread pans'
+                        ]
+                    },
+                    {
+                        'bar Untensils': [
+                            'Coasters', 'Muddlers'
+                        ]
+                    }
+                ]
+            }
+        ];
     }
 
     renderCategoriesList() {
-        const list = [];
-        const categoriesList = this.getCategoriesListObj();
-
-        for (const [category, subCategories] of Object.entries(categoriesList)) {
-            list.push(this.renderCategory(category, subCategories));
-        }
+        const list = this.getCategoriesListObj().map((mainCategory, index) => {
+            return this.renderCategory(mainCategory, index);
+        });
 
         return list;
     }
 
-    renderCategory(category, subCategories) {
-        const subCategoriesList = this.renderSubcategories(subCategories);
+    renderCategory(category) {
+        const categoryName = Object.keys(category)[0];
+        const subCategories = Object.values(category)[0];
 
-        return (<li>{category} {subCategoriesList}</li>);
+        return (
+            <li>
+                <input type="checkbox" defaultChecked={true} />
+                <i></i>
+                <div className="category-header main-category padded-20">{categoryName}</div>
+                <ul className="inner-category">{this.wrapSubCategories(subCategories)}</ul>
+            </li>
+        );
     }
 
-    renderSubcategories(subCategories) {
-        const list = [];
-
-        subCategories.map((subCategory, index) => {
-            list.push(
-                <ListCategory
-                    key={index}
-                    to={index}
-                    description={subCategory}
-                />
+    wrapSubCategories(categoriesArray) {
+        return categoriesArray.map(category => {
+            const subCategoryName = Object.keys(category);
+            const subCategorySpecs = this.wrapProductSpecs(Object.values(category));
+            
+            return (
+                <li>
+                    <input type="checkbox" defaultChecked={true} />
+                    <i></i>
+                    <div className="category-header padded-40 sub-category">{subCategoryName}</div>
+                    <ul className="inner-category">{subCategorySpecs}</ul>
+                </li>
             );
         });
-
-        return (<ul>{list}</ul>);
     }
 
-    // onSubCategoryClick(e) {
-    //     const subCategoryName = e.target.text;
-
-    // }
+    wrapProductSpecs(specsArray) {
+        return specsArray.map(productSpec => {
+            return productSpec.map(spec => {
+                const productCategoryLink = spec.split(' ').join('_').replace(/[^\w\s]/gi, '');
+                return (
+                    <li className="padded-60 category-product">
+                        <Link to={`/products/${productCategoryLink}`}>{spec}</Link>
+                    </li>
+                );
+            });
+        });
+    }  
 
     render() {
         return(
