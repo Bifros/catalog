@@ -35,7 +35,7 @@ export default class Products extends React.Component {
     renderAlphabetRubrics() {
         const alphabetArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
         const alphabetElms = alphabetArray.map((letter) => 
-            <a className="" onClick={this.handleAlphabetClick.bind(this)}> {letter.toUpperCase()} </a>
+            <a style={{cursor: 'pointer'}} className="" onClick={this.handleAlphabetClick.bind(this)}> {letter.toUpperCase()} </a>
         );
         return (<div className="alphabet-wrapper">{alphabetElms}</div>);
     }
@@ -61,7 +61,7 @@ export default class Products extends React.Component {
                         findBy={this.findBy.bind(this)}
                     />
                     <div className="products-by-category">
-                        <h3>{this.productsSpecName}(s):</h3>
+                        <h3 style={{fontSize: '22px', marginBottom: '18px'}}>{this.productsSpecName}(s):</h3>
                         <ProductsTable 
                             show={true}
                             products={this.props.products} 

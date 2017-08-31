@@ -4,13 +4,17 @@ import React from 'react';
 import Routes from '../routes';
 
 const App = () =>
-    <div className="container">
-        <h1>Catalog App</h1>
-        {/* <footer className={footer}>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-        </footer> */}
-        { Routes }
+    <div>
+        <div className="container" style={{borderBottom: '3px solid #000'}}>
+            <h1>Marine Catalogue</h1>
+        </div>
+        <div className="container">
+            {/* <footer className={footer}>
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+            </footer> */}
+            { Routes }
+        </div>
     </div>;
 
 export default App;

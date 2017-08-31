@@ -1,6 +1,5 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-// import ProductPreview from '../components/ProductPreview';
 import ProductsTable from '../components/ProductsTable';
 require('../styles/autosuggest.css');
 
@@ -38,7 +37,6 @@ export default class Search extends React.Component {
             <div>
                 {suggestion.description}
             </div>
-
         );
     }
 
@@ -62,7 +60,6 @@ export default class Search extends React.Component {
 
     onSuggestionSelected = (event, {suggestionValue}) => {
         const found = this.props.findBy(suggestionValue);
-        // this.foundProduct = (<ProductPreview {...found[0]} />);
         this.foundProduct = found;
         this.isProductFound = true;
     };

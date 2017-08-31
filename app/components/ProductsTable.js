@@ -16,7 +16,7 @@ class ProductsTable extends React.Component {
                 </thead>
                 <ProductsTableBody products={Array.isArray(this.props.products) ? this.props.products : []} />
             </table>
-        ) : (<div>Nothing found</div>);
+        ) : (<div></div>);
     }
 
 }

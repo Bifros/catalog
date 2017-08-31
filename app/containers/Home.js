@@ -37,8 +37,8 @@ export default class Home extends React.Component {
 
     renderAlphabetRubrics() {
         const alphabetArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
-        const alphabetElms = alphabetArray.map((letter) => 
-            <a className="" onClick={this.handleAlphabetClick.bind(this)}> {letter.toUpperCase()} </a>
+        const alphabetElms = alphabetArray.map((letter, index) => 
+            <a key={index} className="" onClick={this.handleAlphabetClick.bind(this)}> {letter.toUpperCase()} </a>
         );
         return (<div className="alphabet-wrapper">{alphabetElms}</div>);
     }

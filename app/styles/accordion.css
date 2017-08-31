@@ -1,3 +1,7 @@
+a {
+  cursor: pointer;
+}
+
 .alphabet-wrapper {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -67,6 +71,7 @@
   }
   
   .category-header {
+    line-height: 36px;
     letter-spacing: 1px;
     display: block;
     margin: 0;
@@ -79,10 +84,10 @@
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
-    max-height: 800px;
+    max-height: 1800px;
     opacity: 1;
     transform: translate(0, 0);
-    margin-top: 14px;
+    /* margin-top: 14px; */
     z-index: 2;
   }
   
@@ -98,7 +103,10 @@
     padding: 0;
     margin: 0;
     padding-bottom: 4px;
-    padding-top: 18px;
+    /* padding-top: 18px; */
+  }
+  
+  .main-category-item {
     border-top: 1px dotted #dce7eb;
   }
   
@@ -109,7 +117,7 @@
     position: absolute;
     transform: translate(-6px, 0);
     margin-top: 16px;
-    right: 0;
+    right: 8px;
   }
   ul li i:before, ul li i:after {
     content: "";

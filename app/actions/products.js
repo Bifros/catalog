@@ -8,6 +8,6 @@ export const receiveProducts = (products) => {
 };
 
 export const fetchProducts = () => {
-    const fakeProducts = require('../data/products').products;
+    const fakeProducts = require('../data/products.test').products;
     return dispatch => dispatch(receiveProducts(fakeProducts));
 };
