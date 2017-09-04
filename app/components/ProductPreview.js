@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProductPreview = (props) => (
+const ProductPreview = ({ description, id, units }) => (
     <div>
         <div>
             Product:
-            <b>{props.description}</b>
+            <b>{description}</b>
         </div>
         <div>
-            ID: <b>{props.id}</b>
+            ID: <b>{id}</b>
         </div>
         <div>
-            Units: <b>{props.units}</b>
+            Units: <b>{units}</b>
         </div>
     </div>
 );

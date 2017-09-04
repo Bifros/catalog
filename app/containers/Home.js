@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import HomeComponent from '../components/HomeComponent';
 import Search from './Search';
 import CategoriesList from './CategoriesList';
+import AlphabetRubric from '../components/AlphabetRubric';
+import AlphabetRubricsContainer from '../components/AlphabetRubricsContainer';
 
 @connect(
     store => ({
@@ -38,9 +40,13 @@ export default class Home extends React.Component {
     renderAlphabetRubrics() {
         const alphabetArray = 'abcdefghijklmnopqrstuvwxyz'.split('');
         const alphabetElms = alphabetArray.map((letter, index) => 
-            <a key={index} className="" onClick={this.handleAlphabetClick.bind(this)}> {letter.toUpperCase()} </a>
+            <AlphabetRubric 
+                index={index}
+                handleAlphabetClick={this.handleAlphabetClick.bind(this)}
+                letter={letter}
+            />
         );
-        return (<div className="alphabet-wrapper">{alphabetElms}</div>);
+        return <AlphabetRubricsContainer alphRubricsArray={alphabetElms} />;
     }
 
     handleAlphabetClick(e) {

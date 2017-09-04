@@ -6,9 +6,9 @@ import ProductsTable from '../components/ProductsTable';
 
 @connect(
     (store, props) => ({
-        products: store.products.products.filter(
-            product => product.specification.split(' ').join('_').replace(/[^\w\s]/gi, '').toLowerCase() === props.match.params.productsLink.toLowerCase()
-        ) || []
+        products: store.products.products.filter(product => {
+            return product.specification.split(' ').join('_').replace(/[^\w\s]/gi, '').toLowerCase() === props.match.params.productsLink.toLowerCase();
+        }) || []
     })
 )
 export default class Products extends React.Component {

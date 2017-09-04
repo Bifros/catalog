@@ -1,11 +1,11 @@
 import React from 'react';
 import ProductsTable from './ProductsTable';
 
-const HomeComponent = (props) => (
+const HomeComponent = ({ renderAlphabetRubrics, showProductsTable, productsToDisplay }) => (
     <div>
         <div style={{textAlign: 'center'}}>
-            {props.renderAlphabetRubrics()}
-            <ProductsTable show={props.showProductsTable} products={props.productsToDisplay} />
+            {renderAlphabetRubrics()}
+            <ProductsTable show={showProductsTable} products={productsToDisplay} />
         </div>
     </div>
 );
